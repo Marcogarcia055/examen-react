@@ -46,20 +46,23 @@ export const Factura = () => {
         setFecha((prev) => ({ ...prev, [name]: value }));
     };
 
+    const borrar = () => {
+        setFactura2({
+            Folio: "",
+            idCliente: "",
+            FechaRegistro: new Date().toISOString().split("T")[0],
+            Concepto: "",
+            Cantidad: "",
+            Total: ""
+        });
+    };
     const handleSubmit2 = async (e) => {
         e.preventDefault();
         try {
             const data = await AddFactura(factura2);
             console.log(factura2)
             setFactura2(data);
-            setFactura2({
-                Folio: "",
-                idCliente: "",
-                FechaRegistro: new Date().toISOString().split("T")[0],
-                Concepto: "",
-                Cantidad: "",
-                Total: ""
-            });
+            borrar();
         } catch (error) {
             console.error(error);
         }
@@ -86,7 +89,7 @@ export const Factura = () => {
         <div>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Fecha Inicio </label>
+                    <label>FECHA INICIO </label>
                     <input
                         type="date"
                         name="FechaInicio"
@@ -95,7 +98,7 @@ export const Factura = () => {
                     />
                 </div>
                 <div>
-                    <label>Fecha Fin </label>
+                    <label>FECHA FIN </label>
                     <input
                         type="date"
                         name="FechaFin"
@@ -103,15 +106,15 @@ export const Factura = () => {
                         onChange={handleChange}
                     />
                 </div>
-                <Button type='primary' htmlType='submit'>Buscar</Button>
+                <Button type='primary' htmlType='submit'>BUSCAR</Button>
             </form>
             <table>
                 <thead>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Folio</th>
-                        <th>Cantidad</th>
-                        <th>FechaRegistro</th>
+                        <th>NOMBRE</th>
+                        <th>FOLIO</th>
+                        <th>CANTIDAD</th>
+                        <th>FECHAREGISTRO</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -128,7 +131,7 @@ export const Factura = () => {
             <div>
                 <form onSubmit={handleSubmit2}>
                     <div>
-                        <label>Cliente </label>
+                        <label>CLIENTE </label>
                         <select
                             name="idCliente"
                             value={factura2.idCliente}
@@ -143,7 +146,7 @@ export const Factura = () => {
                         </select>
                     </div>
                     <div>
-                        <label>Folio </label>
+                        <label>FOLIO </label>
                         <input
                             type="text"
                             name="Folio"
@@ -152,7 +155,7 @@ export const Factura = () => {
                         />
                     </div>
                     <div>
-                        <label>FechaRegistro </label>
+                        <label>FECHA REGISTRO </label>
                         <input
                             type="date"
                             name="FechaRegistro"
@@ -161,7 +164,7 @@ export const Factura = () => {
                         />
                     </div>
                     <div>
-                        <label>Concepto </label>
+                        <label>CONCEPTO </label>
                         <input
                             type="text"
                             name="Concepto"
@@ -171,7 +174,7 @@ export const Factura = () => {
                         />
                     </div>
                     <div>
-                        <label>Cantidad</label>
+                        <label>CANTIDAD </label>
                         <input
                             type="number"
                             name="Cantidad"
@@ -194,7 +197,7 @@ export const Factura = () => {
                         />
                     </div>
                     <div>
-                        <label>Total </label>
+                        <label>TOTAL/IVA </label>
                         <input
                             type="text"
                             name="Total"
@@ -203,7 +206,9 @@ export const Factura = () => {
                         />
                     </div>
 
-                    <Button type='primary' htmlType='submit'>Agregar</Button>
+                    <Button type='primary' htmlType='submit'>GUARDAR</Button>
+                    <Button type='primary' onClick={() =>{borrar();}}>CANCELAR</Button>
+
                 </form>
             </div>
         </div>
